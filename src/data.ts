@@ -1,9 +1,18 @@
-// ---- Business details: placeholders, replace with the real ones ----
+// ---- Business details ----
 export const BRAND = "ABS Men's Salon"
-export const PHONE_DISPLAY = '+92 300 0000000'
-export const PHONE_LINK = 'tel:+923000000000'
-export const WHATSAPP_NUMBER = '923000000000'
-export const ADDRESS = '123 Main Street, Your City'
+export const ADDRESS = 'Nayab Valley, Behind Rakshanda Masjid'
+export const MAPS_LINK = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('ABS Mens Salon Nayab Valley Rakshanda Masjid')}`
+
+export const CONTACTS = [
+  { name: 'Malik Ansab Rustam', display: '0309 5654052', tel: 'tel:+923095654052' },
+  { name: 'Raja Mazir', display: '0319 5754756', tel: 'tel:+923195754756' },
+]
+export const PHONE_DISPLAY = CONTACTS[0].display
+export const PHONE_LINK = CONTACTS[0].tel
+// WhatsApp bookings go to the first number
+export const WHATSAPP_NUMBER = '923095654052'
+
+// ---- Placeholders below: replace with the real ones ----
 
 export const whatsappLink = (text = "Hi ABS Men's Salon, I'd like to book an appointment.") =>
   `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(text)}`

@@ -7,7 +7,7 @@ import { HeroCards } from './components/HeroCards'
 import { Sections } from './components/Sections'
 import { Modals } from './components/Modals'
 import { AbsLogo } from './components/AbsLogo'
-import { PHONE_DISPLAY, PHONE_LINK, type ModalKind } from './data'
+import { CONTACTS, ADDRESS, type ModalKind } from './data'
 
 export default function App() {
   const [activeNav, setActiveNav] = useState('')
@@ -44,9 +44,14 @@ export default function App() {
             <AbsLogo className="w-10 h-10" />
             © {new Date().getFullYear()} ABS Men&apos;s Salon
           </span>
-          <a href={PHONE_LINK} className="inline-flex items-center gap-2 min-h-11 text-gold hover:text-gold-light">
-            <Phone className="w-4 h-4" aria-hidden="true" /> {PHONE_DISPLAY}
-          </a>
+          <span className="flex flex-wrap items-center gap-x-5">
+            <span>{ADDRESS}</span>
+            {CONTACTS.map((c) => (
+              <a key={c.tel} href={c.tel} className="inline-flex items-center gap-2 min-h-11 text-gold hover:text-gold-light">
+                <Phone className="w-4 h-4" aria-hidden="true" /> {c.display}
+              </a>
+            ))}
+          </span>
         </footer>
       </div>
 

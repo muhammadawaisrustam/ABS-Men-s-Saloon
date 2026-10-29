@@ -1,6 +1,6 @@
 import { motion } from 'motion/react'
 import { Clock, MapPin, Phone, Star, ImageIcon, MessageCircle } from 'lucide-react'
-import { SERVICES, REVIEWS, HOURS, ADDRESS, PHONE_DISPLAY, PHONE_LINK, whatsappLink } from '../data'
+import { SERVICES, REVIEWS, HOURS, ADDRESS, MAPS_LINK, CONTACTS, whatsappLink } from '../data'
 
 const reveal = {
   initial: { opacity: 0, y: 18 },
@@ -89,11 +89,24 @@ export function Sections({ onBookClick }: { onBookClick: () => void }) {
               <a href={whatsappLink()} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-2 min-h-12 px-6 rounded-full bg-gold-gradient text-ink font-bold">
                 <MessageCircle className="w-5 h-5" aria-hidden="true" /> Book on WhatsApp
               </a>
-              <a href={PHONE_LINK} className="inline-flex items-center gap-2 min-h-12 px-6 rounded-full border border-cream/40 text-cream font-semibold hover:bg-cream hover:text-ink transition-colors">
-                <Phone className="w-4 h-4" aria-hidden="true" /> {PHONE_DISPLAY}
-              </a>
             </div>
-            <p className="mt-6 flex items-center gap-2 text-smoke"><MapPin className="w-5 h-5 text-gold" aria-hidden="true" /> {ADDRESS}</p>
+            <ul className="mt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
+              {CONTACTS.map((c) => (
+                <li key={c.tel}>
+                  <a href={c.tel} className="flex items-center gap-3 min-h-12 rounded-2xl border border-line bg-ink/60 px-4 py-3 hover:border-gold/60 transition-colors">
+                    <Phone className="w-5 h-5 text-gold shrink-0" aria-hidden="true" />
+                    <span>
+                      <span className="block font-semibold text-cream">{c.display}</span>
+                      <span className="block text-xs text-smoke">{c.name}</span>
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+            <a href={MAPS_LINK} target="_blank" rel="noopener noreferrer" className="mt-5 inline-flex items-center gap-2 min-h-11 text-smoke hover:text-gold-light">
+              <MapPin className="w-5 h-5 text-gold" aria-hidden="true" /> {ADDRESS}
+              <span className="text-xs text-gold underline underline-offset-4">Open in Maps</span>
+            </a>
           </div>
           <div className="rounded-2xl border border-line bg-ink/70 p-6 sm:p-8">
             <h3 className="flex items-center gap-2 text-xl font-semibold text-cream"><Clock className="w-5 h-5 text-gold" aria-hidden="true" /> Opening Hours</h3>
