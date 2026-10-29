@@ -1,0 +1,44 @@
+@import "tailwindcss";
+
+/* ABS brand palette: black and charcoal with gold, cream for soft text */
+@theme {
+  --color-ink: #0b0b0b;
+  --color-charcoal: #161616;
+  --color-graphite: #222222;
+  --color-line: #2e2b26;
+  --color-gold: #d9a934;
+  --color-gold-light: #f6d98a;
+  --color-gold-dark: #a5761b;
+  --color-cream: #f5efe2;
+  --color-smoke: #b9b2a5;
+
+  --font-sans: 'Plus Jakarta Sans', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-display: 'Montserrat', 'Outfit', sans-serif;
+  --font-heading: 'Outfit', 'Plus Jakarta Sans', sans-serif;
+  --font-brush: 'Kaushan Script', 'Brush Script MT', cursive;
+}
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply bg-ink text-cream font-sans antialiased; }
+  h1, h2, h3, h4 { font-family: var(--font-heading); }
+  section[id] { scroll-margin-top: 88px; }
+  :focus-visible { outline: 2px solid var(--color-gold); outline-offset: 3px; }
+  ::selection { background: var(--color-gold); color: var(--color-ink); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  *, *::before, *::after { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+@utility text-gold-gradient {
+  background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold) 45%, var(--color-gold-dark));
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-gold-gradient {
+  background: linear-gradient(135deg, var(--color-gold-light), var(--color-gold) 45%, var(--color-gold-dark));
+}
