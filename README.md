@@ -19,7 +19,7 @@ Other commands:
 ## Where to change things
 
 - **Business details** (phone, WhatsApp number, address, prices, hours, reviews): `src/data.ts`
-- **Logo**: `src/components/AbsLogo.tsx` (also `public/abs-logo.svg`)
+- **Logo**: the official logo is `public/abs-logo.jpg`; the site uses the web-optimised copies `public/abs-logo.webp` and `public/abs-logo-small.webp` (shown by `src/components/AbsLogo.tsx`)
 - **Hero video**: add a file at `public/hero.mp4` and it plays in the hero automatically. Without it, the hero shows the logo.
 - **Colours and fonts**: the `@theme` block in `src/index.css`
 
