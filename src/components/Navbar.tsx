@@ -17,7 +17,7 @@ export function Navbar({ activeNav, onNavClick, onBookClick }: NavbarProps) {
     <nav aria-label="Main" className="relative z-40 w-full px-1 sm:px-3 py-2">
       <div className="flex items-center justify-between gap-4">
         <a href="#top" className="flex items-center gap-3 group" onClick={() => onNavClick('')}>
-          <AbsLogo small className="w-12 h-12 sm:w-14 sm:h-14 rounded-full ring-1 ring-gold/40 transition-transform duration-300 group-hover:scale-105" title="ABS Men's Salon home" />
+          <AbsLogo small className="w-12 h-12 sm:w-14 sm:h-14 transition-transform duration-300 group-hover:scale-105" title="ABS Men's Salon home" />
           <span className="leading-none">
             <span className="block font-brush text-2xl sm:text-[28px] text-gold-gradient">ABS</span>
             <span className="block text-[10px] sm:text-[11px] font-bold tracking-[0.28em] text-smoke">MEN&apos;S SALON</span>

@@ -18,9 +18,9 @@ const enter = (delay: number) => ({
 
 export function HeroCards({ onBookClick, onServicesClick, onReviewsClick }: HeroCardsProps) {
   return (
-    <section aria-label="Highlights" className="relative z-30 w-full max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8 -mt-10 sm:-mt-12 lg:-mt-14">
+    <section aria-label="Highlights" className="relative z-30 w-full max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8 mt-6 sm:mt-8">
       {/* Booking pill centred over the middle card */}
-      <div className="relative z-40 flex justify-center mb-[-22px]">
+      <div className="relative z-40 flex justify-center mb-6 sm:mb-8">
         <motion.button
           onClick={onBookClick}
           whileHover={{ scale: 1.04 }}
@@ -52,7 +52,7 @@ export function HeroCards({ onBookClick, onServicesClick, onReviewsClick }: Hero
           </button>
         </motion.div>
 
-        <motion.div {...enter(0.2)} className={`${card} flex flex-col items-center justify-center text-center pt-10`}>
+        <motion.div {...enter(0.2)} className={`${card} flex flex-col items-center justify-center text-center`}>
           <h2 className="text-2xl lg:text-[28px] font-bold leading-tight text-cream">
             Discover The
             <br />

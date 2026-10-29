@@ -86,9 +86,9 @@ export function HeroFrame() {
           initial={{ opacity: 0, scale: 0.92 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="absolute z-20 left-1/2 -translate-x-1/2 top-[6%] h-[72%] aspect-[1046/1008] drop-shadow-[0_20px_50px_rgba(0,0,0,0.7)]"
+          className="absolute z-20 left-1/2 -translate-x-1/2 top-[7%] h-[50%] sm:h-[54%] aspect-[1046/1008] drop-shadow-[0_20px_50px_rgba(0,0,0,0.7)]"
         >
-          <AbsLogo className="w-full h-full rounded-[28px] ring-1 ring-gold/30" />
+          <AbsLogo className="w-full h-full" />
         </motion.div>
       )}
 

@@ -14,7 +14,7 @@ export function AbsLogo({ className, title = "ABS Men's Salon", small = false }:
       width={1046}
       height={1008}
       decoding="async"
-      className={`object-cover ${className ?? ''}`}
+      className={`object-contain ${className ?? ''}`}
     />
   )
 }

@@ -41,7 +41,7 @@ export default function App() {
 
         <footer className="w-full max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8 mt-24 py-8 border-t border-line flex flex-wrap items-center justify-between gap-4 text-sm text-smoke">
           <span className="flex items-center gap-3">
-            <AbsLogo small className="w-10 h-10 rounded-full ring-1 ring-gold/40" />
+            <AbsLogo small className="w-10 h-10" />
             © {new Date().getFullYear()} ABS Men&apos;s Salon
           </span>
           <span className="flex flex-wrap items-center gap-x-5">
