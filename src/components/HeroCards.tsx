@@ -1,5 +1,6 @@
 import { motion } from 'motion/react'
 import { Star, ArrowRight, Scissors, Sparkles } from 'lucide-react'
+import { useContent } from '../lib/content'
 
 interface HeroCardsProps {
   onBookClick: () => void
@@ -17,6 +18,7 @@ const enter = (delay: number) => ({
 })
 
 export function HeroCards({ onBookClick, onServicesClick, onReviewsClick }: HeroCardsProps) {
+  const { settings: s } = useContent()
   return (
     <section aria-label="Highlights" className="relative z-30 w-full max-w-[1440px] mx-auto px-3 sm:px-6 lg:px-8 mt-6 sm:mt-8">
       {/* Booking pill centred over the middle card */}
@@ -27,7 +29,7 @@ export function HeroCards({ onBookClick, onServicesClick, onReviewsClick }: Hero
           whileTap={{ scale: 0.97 }}
           className="inline-flex items-center gap-2 min-h-11 px-7 sm:px-9 rounded-full bg-gold-gradient text-ink font-bold text-sm sm:text-base shadow-[0_10px_30px_rgba(0,0,0,0.6)] cursor-pointer"
         >
-          Book Now · Cuts from Rs 800
+          {s.bookingPillText}
         </motion.button>
       </div>
 
@@ -40,8 +42,8 @@ export function HeroCards({ onBookClick, onServicesClick, onReviewsClick }: Hero
             <Sparkles className="w-5 h-5 text-smoke group-hover:text-gold transition-colors" aria-hidden="true" />
           </div>
           <h2 className="my-4 text-lg sm:text-[19px] lg:text-xl font-medium leading-snug text-cream">
-            Precision Grooming For{' '}
-            <span className="font-bold text-gold-gradient">The Modern Man.</span>
+            {s.card1Title}{' '}
+            <span className="font-bold text-gold-gradient">{s.card1Highlight}</span>
           </h2>
           <button
             onClick={onServicesClick}
@@ -54,20 +56,19 @@ export function HeroCards({ onBookClick, onServicesClick, onReviewsClick }: Hero
 
         <motion.div {...enter(0.2)} className={`${card} flex flex-col items-center justify-center text-center`}>
           <h2 className="text-2xl lg:text-[28px] font-bold leading-tight text-cream">
-            Discover The
+            {s.card2Title}
             <br />
-            <span className="font-brush font-normal text-4xl lg:text-5xl text-gold-gradient">ABS Experience</span>
+            <span className="font-brush font-normal text-4xl lg:text-5xl text-gold-gradient">{s.card2Highlight}</span>
           </h2>
           <p className="mt-3 max-w-[320px] text-sm text-smoke leading-relaxed">
-            Skilled barbers, hot towels and sharp finishes in a relaxed, premium space made for men.
+            {s.card2Text}
           </p>
         </motion.div>
 
         <motion.div {...enter(0.3)} className={`${card} flex flex-col justify-between`}>
-          {/* Rating figures are placeholders: update with your real Google rating */}
           <div className="flex items-center gap-1.5">
             <Star className="w-5 h-5 text-gold fill-gold" aria-hidden="true" />
-            <span className="text-xl font-bold text-cream">4.9</span>
+            <span className="text-xl font-bold text-cream">{s.ratingValue}</span>
             <span className="text-sm text-smoke">rating</span>
           </div>
           <button onClick={onReviewsClick} className="flex items-center gap-3 py-1 text-left cursor-pointer group/rev" aria-label="Read customer reviews">
@@ -79,11 +80,11 @@ export function HeroCards({ onBookClick, onServicesClick, onReviewsClick }: Hero
               ))}
             </span>
             <span className="flex items-baseline gap-1">
-              <span className="text-2xl font-bold text-cream group-hover/rev:text-gold-light transition-colors">500+</span>
-              <span className="text-xs text-smoke">Happy clients</span>
+              <span className="text-2xl font-bold text-cream group-hover/rev:text-gold-light transition-colors">{s.clientsCount}</span>
+              <span className="text-xs text-smoke">{s.clientsLabel}</span>
             </span>
           </button>
-          <p className="text-sm text-smoke leading-relaxed">The barbers your city trusts for fades, beards and classic cuts.</p>
+          <p className="text-sm text-smoke leading-relaxed">{s.card3Text}</p>
         </motion.div>
       </div>
     </section>

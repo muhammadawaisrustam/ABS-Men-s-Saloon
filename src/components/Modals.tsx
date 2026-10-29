@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState, type FormEvent } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { X, Star, Clock, MessageCircle } from 'lucide-react'
-import { SERVICES, REVIEWS, whatsappLink, type ModalKind } from '../data'
+import { useContent, visible, whatsappLink, type ModalKind } from '../lib/content'
 
 interface ModalsProps {
   active: ModalKind
@@ -16,14 +16,16 @@ const TITLES: Record<Exclude<ModalKind, null>, string> = {
 }
 
 function BookForm({ onDone }: { onDone: () => void }) {
+  const { settings, services: all } = useContent()
+  const SERVICES = visible(all)
   const [name, setName] = useState('')
-  const [service, setService] = useState(SERVICES[0].name)
+  const [service, setService] = useState(SERVICES[0]?.name ?? '')
   const [when, setWhen] = useState('')
 
   const submit = (e: FormEvent) => {
     e.preventDefault()
-    const text = `Hi ABS Men's Salon, I'm ${name}. I'd like to book a ${service}${when ? ` on ${when}` : ''}.`
-    window.open(whatsappLink(text), '_blank', 'noopener,noreferrer')
+    const text = `Hi ABS Men's Salon, I'm ${name}. I'd like to book ${service ? `a ${service}` : 'an appointment'}${when ? ` on ${when}` : ''}.`
+    window.open(whatsappLink(settings, text), '_blank', 'noopener,noreferrer')
     onDone()
   }
 
@@ -40,7 +42,7 @@ function BookForm({ onDone }: { onDone: () => void }) {
         <label htmlFor="bk-service" className="block text-sm font-semibold mb-1.5">Service</label>
         <select id="bk-service" value={service} onChange={(e) => setService(e.target.value)} className={field}>
           {SERVICES.map((s) => (
-            <option key={s.name} value={s.name}>{s.name} ({s.price})</option>
+            <option key={s.id} value={s.name}>{s.name} ({s.price})</option>
           ))}
         </select>
       </div>
@@ -56,6 +58,9 @@ function BookForm({ onDone }: { onDone: () => void }) {
 }
 
 export function Modals({ active, onClose, onBook }: ModalsProps) {
+  const content = useContent()
+  const SERVICES = visible(content.services)
+  const REVIEWS = visible(content.reviews)
   const closeRef = useRef<HTMLButtonElement>(null)
 
   useEffect(() => {
@@ -107,11 +112,11 @@ export function Modals({ active, onClose, onBook }: ModalsProps) {
               <div className="space-y-5">
                 <ul className="divide-y divide-line">
                   {SERVICES.map((s) => (
-                    <li key={s.name} className="flex items-start justify-between gap-4 py-3">
+                    <li key={s.id} className="flex items-start justify-between gap-4 py-3">
                       <div>
                         <p className="font-semibold text-cream">{s.name}</p>
-                        <p className="text-sm text-smoke">{s.desc}</p>
-                        <p className="mt-1 inline-flex items-center gap-1 text-xs text-smoke"><Clock className="w-3.5 h-3.5" aria-hidden="true" /> {s.time}</p>
+                        <p className="text-sm text-smoke">{s.description}</p>
+                        <p className="mt-1 inline-flex items-center gap-1 text-xs text-smoke"><Clock className="w-3.5 h-3.5" aria-hidden="true" /> {s.duration}</p>
                       </div>
                       <span className="font-bold text-gold whitespace-nowrap">{s.price}</span>
                     </li>
@@ -123,10 +128,10 @@ export function Modals({ active, onClose, onBook }: ModalsProps) {
 
             {active === 'reviews' && (
               <div className="space-y-3">
-                {REVIEWS.map((r, i) => (
-                  <figure key={i} className="rounded-2xl border border-line bg-ink p-4">
-                    <div className="flex gap-0.5 text-gold" role="img" aria-label="5 out of 5 stars">
-                      {Array.from({ length: 5 }).map((_, j) => <Star key={j} className="w-4 h-4 fill-gold" aria-hidden="true" />)}
+                {REVIEWS.map((r) => (
+                  <figure key={r.id} className="rounded-2xl border border-line bg-ink p-4">
+                    <div className="flex gap-0.5 text-gold" role="img" aria-label={`${r.rating} out of 5 stars`}>
+                      {Array.from({ length: r.rating }).map((_, j) => <Star key={j} className="w-4 h-4 fill-gold" aria-hidden="true" />)}
                     </div>
                     <blockquote className="mt-2 text-sm text-cream">“{r.text}”</blockquote>
                     <figcaption className="mt-2 text-xs font-semibold text-smoke">{r.name}</figcaption>

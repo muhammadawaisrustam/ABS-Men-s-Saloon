@@ -7,15 +7,17 @@ import { HeroCards } from './components/HeroCards'
 import { Sections } from './components/Sections'
 import { Modals } from './components/Modals'
 import { AbsLogo } from './components/AbsLogo'
-import { CONTACTS, ADDRESS, type ModalKind } from './data'
+import { ContentContext, useSiteContent, visible, telLink, type ModalKind } from './lib/content'
 
 export default function App() {
   const [activeNav, setActiveNav] = useState('')
   const [modal, setModal] = useState<ModalKind>(null)
   const close = useCallback(() => setModal(null), [])
   const book = useCallback(() => setModal('book'), [])
+  const content = useSiteContent()
 
   return (
+    <ContentContext.Provider value={content}>
     <MotionConfig reducedMotion="user">
       <a href="#main" className="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-lg focus:bg-gold focus:px-4 focus:py-3 focus:text-ink">
         Skip to main content
@@ -45,10 +47,10 @@ export default function App() {
             © {new Date().getFullYear()} ABS Men&apos;s Salon
           </span>
           <span className="flex flex-wrap items-center gap-x-5">
-            <span>{ADDRESS}</span>
-            {CONTACTS.map((c) => (
-              <a key={c.tel} href={c.tel} className="inline-flex items-center gap-2 min-h-11 text-gold hover:text-gold-light">
-                <Phone className="w-4 h-4" aria-hidden="true" /> {c.display}
+            <span>{content.settings.address}</span>
+            {visible(content.contacts).map((c) => (
+              <a key={c.id} href={telLink(c.phone)} className="inline-flex items-center gap-2 min-h-11 text-gold hover:text-gold-light">
+                <Phone className="w-4 h-4" aria-hidden="true" /> {c.phone}
               </a>
             ))}
           </span>
@@ -57,5 +59,6 @@ export default function App() {
 
       <Modals active={modal} onClose={close} onBook={book} />
     </MotionConfig>
+    </ContentContext.Provider>
   )
 }

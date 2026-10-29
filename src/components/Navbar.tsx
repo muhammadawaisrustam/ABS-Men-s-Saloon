@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { motion, AnimatePresence } from 'motion/react'
 import { Menu, X, CalendarCheck } from 'lucide-react'
 import { AbsLogo } from './AbsLogo'
-import { NAV_ITEMS } from '../data'
+import { NAV_ITEMS, useContent } from '../lib/content'
 
 interface NavbarProps {
   activeNav: string
@@ -12,6 +12,7 @@ interface NavbarProps {
 
 export function Navbar({ activeNav, onNavClick, onBookClick }: NavbarProps) {
   const [open, setOpen] = useState(false)
+  const { settings } = useContent()
 
   return (
     <nav aria-label="Main" className="relative z-40 w-full px-1 sm:px-3 py-2">
@@ -19,8 +20,8 @@ export function Navbar({ activeNav, onNavClick, onBookClick }: NavbarProps) {
         <a href="#top" className="flex items-center gap-3 group" onClick={() => onNavClick('')}>
           <AbsLogo small className="w-12 h-12 sm:w-14 sm:h-14 transition-transform duration-300 group-hover:scale-105" title="ABS Men's Salon home" />
           <span className="leading-none">
-            <span className="block font-brush text-2xl sm:text-[28px] text-gold-gradient">ABS</span>
-            <span className="block text-[10px] sm:text-[11px] font-bold tracking-[0.28em] text-smoke">MEN&apos;S SALON</span>
+            <span className="block font-brush text-2xl sm:text-[28px] text-gold-gradient">{settings.brandName}</span>
+            <span className="block text-[10px] sm:text-[11px] font-bold tracking-[0.28em] text-smoke">{settings.brandSubtitle}</span>
           </span>
         </a>
 

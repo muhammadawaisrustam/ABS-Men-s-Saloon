@@ -1,3 +1,5 @@
+import { useContent } from '../lib/content'
+
 interface AbsLogoProps {
   className?: string
   title?: string
@@ -5,11 +7,13 @@ interface AbsLogoProps {
   small?: boolean
 }
 
-// The official ABS Men's Salon logo, used as supplied.
+// The official ABS Men's Salon logo. An uploaded logo from the admin panel replaces it.
 export function AbsLogo({ className, title = "ABS Men's Salon", small = false }: AbsLogoProps) {
+  const { settings } = useContent()
+  const src = settings.logoUrl || (small ? '/abs-logo-small.webp' : '/abs-logo.webp')
   return (
     <img
-      src={small ? '/abs-logo-small.webp' : '/abs-logo.webp'}
+      src={src}
       alt={title}
       width={1046}
       height={1008}
